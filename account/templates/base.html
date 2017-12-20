@@ -1,0 +1,57 @@
+{% load staticfiles%}
+<!DOCTYPE html>    
+<html>
+      
+    <head>      
+        <title>{% block title %}{% endblock %}</title>
+        <link href="{% static "css/base.css" %}" rel="stylesheet">
+    </head>    
+    <body>
+        
+        <div id="header">
+        
+            <span class="logo">二手市场</span>
+                 
+        {% if request.user.is_authenticated %}
+                 <ul class="menu">
+                  <li {% if section == "homepage" %}class="selected"{% endif %}>
+                    <a href="{% url "homepage" %}">主页</a></p>                
+                     <div id ="content2">
+                        {% block content3 %}
+                        {% endblock %}
+                    <div>  
+                  </li>
+                  <li {% if section == "edit" %}class="selected"{% endif %}>
+                    <a href="{% url "edit" %}">编辑个人信息</a></p>                
+                     <div id ="content2">
+                        {% block content2 %}
+                        {% endblock %}
+                    <div>  
+                  </li>
+                  <li {% if section == "shop" %}class="selected"{% endif %}>
+                    <a href="{% url "product_list"%}">商城</a>
+                  </li>
+                  <li {% if section == "communication" %}class="selected"{% endif %}>
+                    <a href="{% url "blog:post_list" %}">讨论区</a>
+                  </li>
+                  
+                   <p>欢迎{{ request.user.username }}的到来. 
+                    <a href="{% url "logout" %}">退出</a>.</p>
+                 </ul>
+                {% endif %}                 
+            <span class="user">
+               {% if request.user.is_authenticated %}       
+                 <div id ="content1">
+                    {% block content1 %}
+                    {% endblock %}
+                <div>  
+               {% else %}
+                <div id ="content">
+                    {% block content %}
+                    {% endblock %}
+                <div>
+      {% endif %}
+            </span>
+        </div> 
+    </body>    
+</html>

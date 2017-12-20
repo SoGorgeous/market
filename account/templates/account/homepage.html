@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles%}
+{% block title %}Home Page{% endblock %}
+{% block content1 %}
+    <h1 style="text-align:left">主页</h1>
+    <p>接下来会告诉你这个网页的正确打开方式.</p>
+    <h2>功能：</h2><br/>
+    <h3>编辑个人信息：</h3><p>可以修改你的个人信息。</p>
+    <h3>商城：</h3><p>商城中有后台筛选整理出的廉价但是质量优秀的二手产品供大家选择</p>
+    <h3>讨论区：</h3><p>有后台小编为大家专心编写的博文，希望能帮到大家哦！</p> 
+    <h4>那么接下来放一些优秀的产品给大家看看</h4>
+    <img src="{% static "img/timg.jpg" %}">
+    <img src="{% static "img/aj13.jpg" %}">
+{% endblock %}

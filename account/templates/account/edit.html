@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Edit your account{% endblock %}
+{% block content2 %}
+    <h1>编辑你的个人信息</h1>
+    <p>你可以在下方的表单内填入您想修改的个人信息：</p>
+    <form action="." method="post">
+        <p><label style="color:#fff" for="id_first_name">告诉我们你的名字方便后续交流:</label> <input id="id_first_name" maxlength="30" name="first_name" type="text"></p>
+        <p><label style="color:#fff" for="id_last_name">告诉我们你姓什么方便后续交流:</label> <input id="id_last_name" maxlength="30" name="last_name" type="text"></p>
+        <p><label style="color:#fff" for="id_email">邮箱可让我们来联系到你方便后续交流:</label> <input id="id_email" maxlength="254" name="email" type="email"></p>
+        {% csrf_token %}
+    <p><input type="submit" value="保存修改"></p>
+    </form>
+{% endblock %}

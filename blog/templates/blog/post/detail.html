@@ -1,0 +1,42 @@
+{% extends "blog/base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <p class="date">发表时间： {{ post.publish }} 作者： {{ post.author }}</p>
+    {{ post.body|linebreaks }}
+    
+    <h2>相似文章</h2>
+    {% for post in similar_posts %}
+        <p><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></p>
+    {% empty %}
+        无相似文章.
+    {% endfor %}
+    
+    {% with comments.count as total_comments %}
+        <h2>{{ total_comments }} 条评论</h2>
+    {% endwith %}
+    
+    {% for comment in comments %}
+        <div class="comment">
+            <p class="info">第 {{ forloop.counter }}条评论  用户名：{{ comment.name }} {{ comment.created }}</p>
+            {{ comment.body|linebreaks }}
+        </div>
+    {% empty %}
+        <p>无评论</p>
+    {% endfor %}
+    
+    {% if new_comment %}
+        <h2>Your comment has been added.</h2>
+    {% else %}
+        <h2>新增评论</h2>
+        <form action="." method="post">
+            <p><label style="color:#fff" for="id_name">名字:</label> <input id="id_name" maxlength="80" name="name" type="text"></p>
+            <p><label style="color:#fff" for="id_email">邮箱:</label> <input id="id_email" maxlength="254" name="email" type="email"></p>
+            <p><label style="color:#fff" for="id_body">内容:</label> <textarea cols="40" id="id_body" name="body" rows="10"></textarea></p>
+            {% csrf_token %}
+            <p><input type="submit" value="提交评论"></p>
+        </form>
+    {%  endif %}
+{% endblock %}
